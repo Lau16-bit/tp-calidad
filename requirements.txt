@@ -1,0 +1,4 @@
+pyttest
+pytest-cov
+requests
+behave
