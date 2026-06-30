@@ -28,9 +28,9 @@ jobs:
       
       - name: Run tests with coverage
         run: |
-          pytest --cov=./ --cov-report=xml || true
+          pytest --cov=./ --cov-report=xml
       
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v4
+        uses: SonarSource/sonarqube-scan-action@v6   # <--- CAMBIADO a v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
