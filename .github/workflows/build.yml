@@ -9,11 +9,27 @@ on:
 jobs:
   sonarqube:
     name: SonarQube
-    runs-on: ubuntu-latest  # CAMBIÉ a ubuntu (más rápido que windows)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest-cov
+      
+      - name: Run tests with coverage
+        run: |
+          pytest --cov=./ --cov-report=xml
+      
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@c435f575f77fb7b3c8acf5b200f32fc115c6d03c
         env:
