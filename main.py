@@ -17,3 +17,5 @@ def obtener_usuario(id_usuario):
         return response.json()
     else:
         return None
+
+# TP7 - Gestión de Calidad - 2026
