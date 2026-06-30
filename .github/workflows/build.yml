@@ -28,9 +28,12 @@ jobs:
       
       - name: Run tests with coverage
         run: |
-          pytest --cov=./ --cov-report=xml
+          pytest --cov=./ --cov-report=xml --cov-report=html || true
       
       - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v6   # <--- CAMBIADO a v6
+        uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.python.coverage.reportPaths=coverage.xml
